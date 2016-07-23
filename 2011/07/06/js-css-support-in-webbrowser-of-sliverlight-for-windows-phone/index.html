@@ -1,0 +1,368 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Yifei Zhang">
+  
+  
+  
+  
+    <meta name="description" content="最近因为工作上的原因，重拾C#做一个Windows Phone 7的客户端应用，虽然半途而废，不过也在碰摔中了解到了WP７的确是一个仓促之作，尤其是对于开发人员而言。
+在应用中展示html或者远程网页，SliverLight for Windows Phone提供了一个叫WebBrowser.aspx “WebBrowser Members”)的控件。在使用这个控件的过程中，发现了一个哭笑不...">
+  
+  <title>Sliverlight for WP7 中WebBrowser控件对js和css的支持性总结 [ Yifei Zhang ]</title>
+  
+    <link rel="alternate" href="/atom.xml" title="Yifei Zhang">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2011/09/08/php-source-convert-gbk-big5-to-utf8/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        PHP源码编码与转换：搞定首行为空和“锘匡豢”
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2011/05/16/implement-dig-with-php-and-ajax/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        利用PHP和AJAX实现“顶”贴功能
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">Yifei Zhang</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">首页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">文章</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">分类</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/HQCfly">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Sliverlight for WP7 中WebBrowser控件对js和css的支持性总结</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2011年7月6日</span>
+      
+        <span id = "post-title-updated">修改于 2016年7月23日</span>
+      
+      
+      <span id = "post-title-categories">分类
+      
+      
+        
+        
+        <a href="/categories/前端代码与禅/">前端代码与禅</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/WP7/">WP7</a>
+      
+      </span>
+      
+    </p>
+    
+    <p>最近因为工作上的原因，重拾C#做一个Windows Phone 7的客户端应用，虽然半途而废，不过也在碰摔中了解到了WP７的确是一个仓促之作，尤其是对于开发人员而言。</p>
+<p>在应用中展示html或者远程网页，SliverLight for Windows Phone提供了一个叫<a href="http://msdn.microsoft.com/en-us/library/microsoft.phone.controls.webbrowser_members(v=VS.92" target="_blank" rel="external">WebBrowser</a>.aspx “WebBrowser Members”)的控件。在使用这个控件的过程中，发现了一个哭笑不得的问题：应用无法直接使用其内部的各类资源，无论是html还是图片，必须先得将这些复制到手机上，再从手机上读取后使用！天哪！亏WP7 SDK的开发人员想得出来，你看到<a href="http://msdn.microsoft.com/en-us/library/ff431811(v=VS.92" target="_blank" rel="external">这篇MSDN文章</a>.aspx “How to: Display Static Web Content Using the WebBrowser Control for Windows Phone”)的时候一定会崩溃，不过我已经不是第一个<a href="http://technodave.wordpress.com/2010/11/11/moving-files-from-xap-to-isolated-storage-for-local-html-content-on-windows-phone-7/" title="Moving Files from XAP to Isolated Storage for Local HTML Content on Windows Phone 7" target="_blank" rel="external">遇到这种情况的人了</a>。</p>
+<p>WebBrowser控件在默认的情况下，是不支持JavaScript的，若需要对其进行支持，需要设置其IsScriptEnabled为true，但要命的是，设置之后，只有在下一次打开页面的时候才会生效。</p>
+<p>经测试，当html是从手机的独立存储中读取时，无论CSS是在手机内，还是在远程服务器上，均可正常支持。JavaScript同样如此。当html位于远程服务器中时，js可以是来自另外的远程服务器。</p>
+<p>但致命的问题是，当WebBrowser控件中的内容有鼠标点击动作时，整个控件（还包括其它的输入性控件，如TextBox或者RadioButton）均有闪烁的情况！！这预示着大部分的html5游戏是没办法简单的移植了。</p>
+<p>另外，对于WebBrowser中的内容，无法设置其x和y坐标，也无法设置其缩放比例！这点很是蛋疼。</p>
+<p>看来，Android和iOS的确让Microsoft慌了手脚，NOKIA就不用说了。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2011/09/08/php-source-convert-gbk-big5-to-utf8/" class="prev">&larr; 上一篇 PHP源码编码与转换：搞定首行为空和“锘匡豢”</a>
+  
+
+  
+
+  
+    <a href="/2011/05/16/implement-dig-with-php-and-ajax/" class="next">下一篇 利用PHP和AJAX实现“顶”贴功能 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Yifei Zhang using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description">Yifei Zhang的博主是一名Node.js程序员，博客的内容会涉及电影 / 生活 / 吐槽 / JavaScript / PHP / Node.js / Express / MongoDB / MySQL / Redis / AngularJS / jQuery / HTML。</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/HQCfly">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.hqcfly.com">
+        
+          Coding.NET
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/5324856993/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/147906826/">
+        
+          <i class="icon iconfont douban">&#xe609;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://chensd.com/feed">
+        
+          <i class="icon iconfont rss">&#xe60e;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

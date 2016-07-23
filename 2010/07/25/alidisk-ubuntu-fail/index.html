@@ -1,0 +1,356 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Yifei Zhang">
+  
+  
+  
+  
+    <meta name="description" content="在yangro’s blog上看到一个关于阿里网盘的介绍，想试试，看看有没有国内其它网盘的一些恶习，于是就注册了，注册完看见有个上传着你的提示，据说还有积分，本着不要白不要，要也也有可能是白要的精神，我专程去搜了一张图片来准备传上去，結果，悲剧了，上传程序估计对上传的文件地址有一个验证，結果却把linux文件系统的文件路径给无视了，悲剧啊。
+
+经验证，firefox on ubuntu要比c...">
+  
+  <title>阿里网盘在Ubuntu上杯具了！ [ Yifei Zhang ]</title>
+  
+    <link rel="alternate" href="/atom.xml" title="Yifei Zhang">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2010/08/29/doubanfm/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        不要迟疑，赶紧去使用那些优秀的服务
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2010/06/28/mysql-1194-error-makes-wordpress-index-black/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        由MySQL的1194错误导致的Wordpress主页无任何文章显示
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">Yifei Zhang</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">首页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">文章</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">分类</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/HQCfly">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>阿里网盘在Ubuntu上杯具了！</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2010年7月25日</span>
+      
+        <span id = "post-title-updated">修改于 2016年7月19日</span>
+      
+      
+      <span id = "post-title-categories">分类
+      
+      
+        
+        
+        <a href="/categories/乱七八糟/">乱七八糟</a>
+      
+      </span>
+      
+      
+    </p>
+    
+    <p>在<a href="http://www.yangro.tk/" target="_blank" rel="external">yangro’s blog</a>上看到一个关于<a href="http://www.yangro.tk/?p=39" target="_blank" rel="external">阿里网盘的介绍</a>，想试试，看看有没有国内其它网盘的一些恶习，于是就注册了，注册完看见有个上传着你的提示，据说还有积分，本着不要白不要，要也也有可能是白要的精神，我专程去搜了一张图片来准备传上去，結果，悲剧了，上传程序估计对上传的文件地址有一个验证，結果却把linux文件系统的文件路径给无视了，悲剧啊。</p>
+<p><a href="/upfile/2010/07/alidisk_upload_icon_error_on_ubuntu.png"><img src="/upfile/2010/07/alidisk_upload_icon_error_on_ubuntu.png" alt="阿里网盘在ubuntu中上传着你失败" title="alidisk_upload_icon_error_on_ubuntu"></a></p>
+<p>经验证，firefox on ubuntu要比chrome on ubuntu要好，至少，显示的警告对话框的标题是完整的。</p>
+<p><strong>附：更悲剧的是，不仅仅是头像无法上传，连普通文件都无法上传。</strong></p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2010/08/29/doubanfm/" class="prev">&larr; 上一篇 不要迟疑，赶紧去使用那些优秀的服务</a>
+  
+
+  
+
+  
+    <a href="/2010/06/28/mysql-1194-error-makes-wordpress-index-black/" class="next">下一篇 由MySQL的1194错误导致的Wordpress主页无任何文章显示 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Yifei Zhang using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description">Yifei Zhang的博主是一名Node.js程序员，博客的内容会涉及电影 / 生活 / 吐槽 / JavaScript / PHP / Node.js / Express / MongoDB / MySQL / Redis / AngularJS / jQuery / HTML。</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/HQCfly">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.hqcfly.com">
+        
+          Coding.NET
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/5324856993/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://www.douban.com/people/147906826/">
+        
+          <i class="icon iconfont douban">&#xe609;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://chensd.com/feed">
+        
+          <i class="icon iconfont rss">&#xe60e;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
