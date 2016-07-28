@@ -16,10 +16,17 @@
   
   
   
-    <meta name="description" content="把博客从 Wordpress 转换到 Hexo 之后，大部分的时间使用的就是 NeXT 这个主题，不过一直不是很喜欢在文章列表中显示摘要，加上最近发现了一个提供随机图片的服务 unsplash，所以决定自己来写一款 Hexo 主题。
-五一假期的时候动工的，一直到 19 号早上提交到 Hexo 的官方主题列表，总共花了差不多 20 天，大问题已经差不多解决了，不过 css 写得挺乱的。第一次做...">
+    <meta name="description" content="流行框架第六天：电影列表检索案例step-01 构建项目结构
+克隆项目骨架
+
+12$ git clone --depth=1 https://github.com/Micua/angular-boilerplate.git moviecat$ cd moviecat
+
+安装项目依赖
+
+1$ bower install bootstrap --save
+12.editorconfig -- 统...">
   
-  <title>发布了一个 Hexo 的新主题：Random [ Yifei Zhang ]</title>
+  <title>电影列表检索案例 [ Yifei Zhang ]</title>
   
     <link rel="alternate" href="/atom.xml" title="Yifei Zhang">
   
@@ -40,22 +47,13 @@
 <body>
 <div class="side-navigate hide-area">
   
-    <div class="item prev">
-      <a href="/2016/05/22/EncloseJS/">
-        <div class="item-icon"></div>
-      </a>
-      <div class="item-title">
-        利用 EncloseJS 来打包、加密和保护 Node.js 代码
-      </div>
-    </div>
-  
   
     <div class="item next">
-      <a href="/2016/04/03/Transfer-web-app-to-desktop-app-with-NW-js/">
+      <a href="/2016/07/10/Authorzation-and-Login-in-Angular/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        使用 NW.js 将 Web 应用打包为桌面应用
+        Angular应用中的登陆与身份验证
       </div>
     </div>
   
@@ -130,11 +128,11 @@
       
       
   <article id="post">
-    <h1>发布了一个 Hexo 的新主题：Random</h1>
+    <h1>电影列表检索案例</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2016年5月20日</span>
+      <span id = "post-title-date">撰写于 2016年7月28日</span>
       
-        <span id = "post-title-updated">修改于 2016年7月23日</span>
+        <span id = "post-title-updated">修改于 2016年7月28日</span>
       
       
       <span id = "post-title-categories">分类
@@ -142,7 +140,7 @@
       
         
         
-        <a href="/categories/前端代码与禅/">前端代码与禅</a>
+        <a href="/categories/后端技术/">后端技术</a>
       
       </span>
       
@@ -153,64 +151,51 @@
       
         
         
-        <a href="/tags/JavaScript/">JavaScript</a>
-      
-        
-          /
-        
-        
-        <a href="/tags/Hexo/">Hexo</a>
-      
-        
-          /
-        
-        
-        <a href="/tags/Blog/">Blog</a>
+        <a href="/tags/前端代码与禅/">前端代码与禅</a>
       
       </span>
       
     </p>
     
-    <p>把博客从 Wordpress 转换到 Hexo 之后，大部分的时间使用的就是 NeXT 这个主题，不过一直不是很喜欢在文章列表中显示摘要，加上最近发现了一个提供随机图片的服务 <a href="http://source.unsplash.com/" target="_blank" rel="external">unsplash</a>，所以决定自己来写一款 Hexo 主题。</p>
-<p>五一假期的时候动工的，一直到 19 号早上提交到 Hexo 的官方主题列表，总共花了差不多 20 天，大问题已经差不多解决了，不过 css 写得挺乱的。第一次做博客程序的主题，收获还是挺多的，接触了两个新技术，一个是模板引擎 swig，一个是 css 预编译 stylus ——前同天才看到， swig 已经停止更新一年多了。还发现了 <a href="http://iconfont.cn/" target="_blank" rel="external">iconfont</a> 这个相当不错的平台。另外就是用了一下在 Github Tending 上发现的视频插件 <a href="https://plyr.io/" target="_blank" rel="external">plyr</a> ，界面还挺不错。部署时，由于 Github 上单个 repo 所属的 Github pages 与 stiekel.github.io 的发生冲突，所以用上了注册了很久的 heroku 账号，感叹国内速度 Github Pages 快多了。</p>
-<p>在制作主题的过程中，借鉴了 <a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme" target="_blank" rel="external">Tranquilpeak</a> 这个主题，以及 <a href="http://iwritejs.com/who-is-using-jquery/" target="_blank" rel="external">IwJS</a> 中的翻页按钮——不过目前做得没这个漂亮。主题的基础是使用 <a href="https://github.com/tcrowe/generator-hexo-theme" target="_blank" rel="external">generator-hexo-theme</a> 生成的。</p>
-<p>由于使用了 unsplash 的随机图片作为背景图，所以主题定名为 Random ，主要特色如下：</p>
-<ul>
-<li>使用只有基本信息和链接的首页</li>
-<li>使用随机轮播大图作为背景，感谢 <a href="http://source.unsplash.com/" target="_blank" rel="external">unsplash</a> 和 <a href="http://vegas.jaysalvat.com/" target="_blank" rel="external">vegas</a></li>
-<li>放弃在存档、标签和分类列表中使用摘要显示</li>
-<li>放弃在存档、标签和分类列表中使用翻页功能</li>
-<li>在存档、标签和分类列表中支持图库的显示</li>
-<li>使用 plyr 来作为视频的播放器</li>
+    <h1 id="流行框架第六天：电影列表检索案例"><a href="#流行框架第六天：电影列表检索案例" class="headerlink" title="流行框架第六天：电影列表检索案例"></a>流行框架第六天：电影列表检索案例</h1><h2 id="step-01-构建项目结构"><a href="#step-01-构建项目结构" class="headerlink" title="step-01 构建项目结构"></a>step-01 构建项目结构</h2><ul>
+<li>克隆项目骨架</li>
 </ul>
-<p>当然，自己的博客第一时间切换到了新主题，最后放上链接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> --depth=1 https://github.com/Micua/angular-boilerplate.git moviecat</div><div class="line">$ <span class="built_in">cd</span> moviecat</div></pre></td></tr></table></figure>
 <ul>
-<li>heroku 的 <a href="hexo-theme-random.herokuapp.com">demo</a> </li>
-<li>Github 上的 <a href="https://github.com/stiekel/hexo-theme-random" target="_blank" rel="external">hexo-theme-random</a>  repo </li>
-<li><a href="https://github.com/stiekel/hexo-theme-random/blob/master/README.CN.md" target="_blank" rel="external">hexo-theme-random 中文文档</a></li>
+<li>安装项目依赖</li>
 </ul>
-<p>有问题或建议，欢迎提 issue。</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bower install bootstrap --save</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.editorconfig -- 统一不同开发者的不同开发工具的不同开发配置</div><div class="line">在Sublime中使用需要安装一个EditorConfig的插件</div></pre></td></tr></table></figure>
+<ul>
+<li>为NG做一个项目骨架的目的是为了快速开始一个新的项目</li>
+<li>angular-seed</li>
+</ul>
+<p>npm 在 package.json中的script节点中可以定义脚本任务，</p>
+<p>API的概念：<br>Application Programxxx Interface<br>应用程序编程接口</p>
+<p>有哪些常见的API</p>
+<p>WebAPI 通过WEB方式提供结构叫做 WEBAPI</p>
+<p>Math.random() – api?</p>
+<p>所有有输入有输出的事物都可以是API<br>都是函数</p>
+<p>测试WebAPI的工具： POSTMAN</p>
+<h2 id="step-02-抽象数据成员，以假数据的方式设计控制器和视图"><a href="#step-02-抽象数据成员，以假数据的方式设计控制器和视图" class="headerlink" title="step-02 抽象数据成员，以假数据的方式设计控制器和视图"></a>step-02 抽象数据成员，以假数据的方式设计控制器和视图</h2><h2 id="step-03-图片链接数据绑定BUG"><a href="#step-03-图片链接数据绑定BUG" class="headerlink" title="step-03 图片链接数据绑定BUG"></a>step-03 图片链接数据绑定BUG</h2><h2 id="step-04-豆瓣API介绍，加入-http服务对象完成AJAX请求数据"><a href="#step-04-豆瓣API介绍，加入-http服务对象完成AJAX请求数据" class="headerlink" title="step-04 豆瓣API介绍，加入$http服务对象完成AJAX请求数据"></a>step-04 豆瓣API介绍，加入$http服务对象完成AJAX请求数据</h2><h2 id="step-05-加载提示，Loading状态设计"><a href="#step-05-加载提示，Loading状态设计" class="headerlink" title="step-05 加载提示，Loading状态设计"></a>step-05 加载提示，Loading状态设计</h2><h2 id="step-06-修改字符数组的展示形式"><a href="#step-06-修改字符数组的展示形式" class="headerlink" title="step-06 修改字符数组的展示形式"></a>step-06 修改字符数组的展示形式</h2><h2 id="step-07-实现分页功能"><a href="#step-07-实现分页功能" class="headerlink" title="step-07 实现分页功能"></a>step-07 实现分页功能</h2><h2 id="step-07-抽象公共的列表页"><a href="#step-07-抽象公共的列表页" class="headerlink" title="step-07 抽象公共的列表页"></a>step-07 抽象公共的列表页</h2><h2 id="step-08-搜索功能模块"><a href="#step-08-搜索功能模块" class="headerlink" title="step-08 搜索功能模块"></a>step-08 搜索功能模块</h2><h2 id="step-09-详细页模块设计展示"><a href="#step-09-详细页模块设计展示" class="headerlink" title="step-09 详细页模块设计展示"></a>step-09 详细页模块设计展示</h2>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
     <h2>目录</h2>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#流行框架第六天：电影列表检索案例"><span class="toc-text">流行框架第六天：电影列表检索案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#step-01-构建项目结构"><span class="toc-text">step-01 构建项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-02-抽象数据成员，以假数据的方式设计控制器和视图"><span class="toc-text">step-02 抽象数据成员，以假数据的方式设计控制器和视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-03-图片链接数据绑定BUG"><span class="toc-text">step-03 图片链接数据绑定BUG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-04-豆瓣API介绍，加入-http服务对象完成AJAX请求数据"><span class="toc-text">step-04 豆瓣API介绍，加入$http服务对象完成AJAX请求数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-05-加载提示，Loading状态设计"><span class="toc-text">step-05 加载提示，Loading状态设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-06-修改字符数组的展示形式"><span class="toc-text">step-06 修改字符数组的展示形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-07-实现分页功能"><span class="toc-text">step-07 实现分页功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-07-抽象公共的列表页"><span class="toc-text">step-07 抽象公共的列表页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-08-搜索功能模块"><span class="toc-text">step-08 搜索功能模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-09-详细页模块设计展示"><span class="toc-text">step-09 详细页模块设计展示</span></a></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/05/22/EncloseJS/" class="prev">&larr; 上一篇 利用 EncloseJS 来打包、加密和保护 Node.js 代码</a>
-  
 
   
 
   
-    <a href="/2016/04/03/Transfer-web-app-to-desktop-app-with-NW-js/" class="next">下一篇 使用 NW.js 将 Web 应用打包为桌面应用 &rarr;</a>
+    <a href="/2016/07/10/Authorzation-and-Login-in-Angular/" class="next">下一篇 Angular应用中的登陆与身份验证 &rarr;</a>
   
 </nav>
 
